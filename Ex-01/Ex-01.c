@@ -19,10 +19,11 @@ struct lista *cria(int n){//cria lista com n nós
   struct lista *p, *ini, *ult;
   ini = ult = NULL;
 
-  for(i=0 ; i<=n; i++){
+  for(i=0 ; i<n; i++){
     printf("\nInforme um valor: ");
     scanf("%d", &valor);
     p = (struct lista*)malloc(sizeof(struct lista));
+    p->valor = valor;
     p->prox = NULL;
     if(ult)
       ult->prox=p;
@@ -96,7 +97,7 @@ struct lista *removeK(struct lista *p, int k){
     }
     else{
       t=p->prox;
-      p->prox=NULL;//!!!!!!!PERGUNTAR: pq colocar p->prox=NULL se vamos liberar o espaço da memória onde p aponta.
+      p->prox=NULL;
       free(p);
       return t;
     }
@@ -112,4 +113,13 @@ struct lista *removeK(struct lista *p, int k){
     free(p);
     return t;
   }
+}
+
+int main() {
+  struct lista *l1;
+
+  l1 = cria(3);
+
+  imprimirLista(l1);
+  return 0;
 }
