@@ -1,0 +1,2 @@
+/*2) Considere uma estrutura do tipo Lista Simplesmente Encadeada que contém números reais. Escreva um programa que gere e imprima duas listas L1 e L2 de tamanhos lidos via teclado. Logo após, crie uma função que recebe as duas listas e concatena a lista L2 no final da lista
+L1. A função deve retornar ponteiro para o início da lista concatenada Imprima a lista concatenada.*/

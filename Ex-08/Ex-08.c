@@ -1,0 +1,3 @@
+/*Escreva um programa que leia duas Listas Simplesmente Encadeadas Circulares de números inteiros, que não apresentam repetição de dados em cada uma. Logo após, escreva funções para:
+i) Criar uma outra lista com os elementos que apareçam na 1a. lista e também apareçam na 2a. lista (tipo interseção de conjuntos). Imprima a lista;
+ii) Gerar uma terceira lista que represente a união das listas de entrada (tipo união de conjuntos). Imprima a lista.*/
