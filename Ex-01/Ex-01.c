@@ -19,8 +19,9 @@ struct lista *cria(int n){//cria lista com n nós
   struct lista *p, *ini, *ult;
   ini = ult = NULL;
 
+  puts("");
   for(i=0 ; i<n; i++){
-    printf("\nInforme um valor: ");
+    printf("Informe um valor: ");
     scanf("%d", &valor);
     p = (struct lista*)malloc(sizeof(struct lista));
     p->valor = valor;
@@ -115,11 +116,115 @@ struct lista *removeK(struct lista *p, int k){
   }
 }
 
+struct lista *copia(struct lista *p, int n){
+  struct lista *ini, *copia, *final;
+  ini = final = NULL;
+  
+  if(!p)
+      return 0;
+  
+  if(!p->prox){
+    copia = (struct lista*)malloc(sizeof(struct lista));
+    copia->valor = p->valor;
+    copia->prox = NULL;
+  }
+
+    for(int i = 0; i < n ; i++ ){
+    copia = (struct lista*)malloc(sizeof(struct lista));
+    if(i==0)
+      ini = copia;
+    copia->valor = p->valor;
+    p = p->prox;
+    copia->prox = NULL;
+    if(final)
+      final->prox=copia;
+    else  
+      ini=copia;
+    final=copia;
+  }
+  return ini;
+}
+
+struct lista *descobrePar(struct lista *p){
+  struct lista *par, *iniPar, *finalPar;
+  iniPar = finalPar = NULL;
+
+  if(!p) {
+    return NULL;
+  }
+
+  while(p){
+    if((p->valor%2) == 0){
+        par = (struct lista*)malloc(sizeof(struct lista));
+        par->valor = p->valor;
+        par->prox= NULL;
+        if(finalPar)
+          finalPar->prox=par;
+        else  
+          iniPar=par;
+        finalPar=par;
+      }
+      p = p->prox;
+  }
+  return iniPar;
+}
+
+struct lista *descobreImpar(struct lista *p){
+  struct lista *impar, *iniImpar, *finalImpar;
+  iniImpar = finalImpar = NULL;
+
+  if(!p) {
+    return NULL;
+  }
+
+  while(p){
+    if((p->valor%2) == 1){
+        impar = (struct lista*)malloc(sizeof(struct lista));
+        impar->valor = p->valor;
+        impar->prox= NULL;
+        if(finalImpar)
+          finalImpar->prox=impar;
+        else  
+          iniImpar=impar;
+        finalImpar=impar;
+      }
+      p = p->prox;
+  }
+  return iniImpar;
+}
+
+
 int main() {
-  struct lista *l1;
+  struct lista *l1, *l2, *par, *impar;
+  int n;
 
-  l1 = cria(3);
+  printf("\nDigite o numero de nos: ");
+  scanf("%d", &n);
 
+  l1 = cria(n);
+
+  l2 = copia(l1, n);
+
+  puts("");
+  printf("l1: \n");
   imprimirLista(l1);
+  puts("");
+
+  printf("\nl2:\n");
+  imprimirLista(l2);
+  puts("");
+
+  par = descobrePar(l2);
+  printf("\nPar:\n");
+  imprimirLista(par);
+  puts("");
+
+  impar = descobreImpar(l2);
+  printf("\nImpar:\n");
+  imprimirLista(impar);
+  puts("");
+  puts("");
+  
+
   return 0;
 }
