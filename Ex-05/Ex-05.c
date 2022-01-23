@@ -13,37 +13,35 @@ struct lista *insereOrd(struct lista *p, int valor)
  	struct lista *t, *q, *r;
 
 	q=(struct lista*)malloc(sizeof(struct lista));
-	q -> info=valor;
+	q->info=valor;
 
  	if(!p) {
- 		q->prox=NULL;
-		return q;
-	}
- 	else{
- 		r=p;
+ 		 q->prox=NULL;
+		  return q;
+	 }
+ 	 else{
+ 		 r=p;
   		while(p && valor > p->info) {
-			t=p;
-  			p=p->prox;
-		}
+			   t=p;
+  			   p=p->prox;
+		 }
   		if(!p)
 		{ 
-  			t->prox=q;
-  			q -> prox=NULL;
-			return r;
-		}
-		if(valor<p->info) 
+  			 t->prox=q;
+  			 q->prox=NULL;
+			 return r;
+		 }
+		 if(valor<p->info) 
 		{
    			q->prox=p;
    			if(p!=r) {
-    			t->prox=q;
-   			return r;
+    				t->prox=q;
+   				return r;
  			 }
-   		return q;
+   			return q;
   		}
-	}
+	  }
 }
-
-
 
 
 void imprimirLista(struct lista *p){
@@ -55,7 +53,9 @@ void imprimirLista(struct lista *p){
 
 int main(){
 	struct lista *l1;
-	int n, *v;
+	int n, *v, a, i;
+
+	l1 = NULL;
 
 	printf("\nDigite o tamanho do vetor: ");
 	scanf("%d", &n);
@@ -73,19 +73,16 @@ int main(){
 		scanf("%d", &v[i]);
 	}
 
-	
-	l1 = insereOrd(l1, v[0]);
+	for(i=0 ; i<n ; i++){
+		a = v[i];
+		l1 = insereOrd(l1, a);
+	}
 
 
 	puts("");
 	printf("\nLista l1: \n");
 	imprimirLista(l1);
 	puts("");
-	for(int i=0 ; i<1 ; i++)
-		printf("%d\t", v[i]);
-	puts("");
-
-	
 
 	free(v);
 	return 0;
