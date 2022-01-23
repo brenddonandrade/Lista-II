@@ -19,8 +19,9 @@ struct lista *cria(int n){
 
 	ini = NULL;
 
+	puts("");
 	for(i=0 ; i<n ; i++){
-		printf("\nInforme um valor: ");
+		printf("Informe um valor: ");
 		scanf("%d", &valor);
 		p=(struct lista*) malloc(sizeof(struct lista));
 		p->info = valor;
@@ -115,7 +116,6 @@ struct lista *copia(struct lista *p){
 	do {
 		copia = (struct lista *)malloc(sizeof(struct lista));
 		copia->info = p->info;
-		p = p->prox;
 		if(!ini){
 			copia->prox = copia;
 			ini = copia;
@@ -124,16 +124,17 @@ struct lista *copia(struct lista *p){
 			ult->prox = copia; 
 		}
 		ult = copia;
+		p = p->prox;
 
 	}while(p!=aux);
 
 	return copia;
 }
 
-/*
+
 struct lista *insereAntesK(struct lista *p, int k){
-	struct lista *q, *r;
-	int cont = 1; valor;
+	struct lista *aux, *q, *t,  *r;
+	int cont = 1; int valor;
 	
 	printf("\nDigite o valor a ser inserido: ");
 	scanf("%d", &valor);
@@ -141,36 +142,60 @@ struct lista *insereAntesK(struct lista *p, int k){
 	r = (struct lista*)malloc(sizeof(struct lista*));
 	r->info = valor;
 
-	q = p->prox;
-
-	while(cont!=k){
-		cont++;
-		q = q->prox;
+	aux = p;
+	t = p->prox;
+	if(p->prox == p){
+		p->prox = r;
+		r->prox = p; 
+	}else {
+		while(!(t->prox == aux)){
+			t = t->prox;
+			q = t;
+		}
+		q->prox = r;
+		r->prox = p;
 	}
-	r->prox = q->prox;
-	q->prox prox = r;
+	return p;
+}
 
-	if(q == p)
-		return r;
-	else 
-		return p;
-
-
-}*/
 
 int main() {
 	struct lista *l1, *l2;
-	int i, n;
+	int i, n, cont;
 
 	printf("\nDigite o numero de nos:");
 	scanf("%d", &n);
 
 	l1 = cria(n);
 
+	cont = contaNos(l1);
+
+	printf("\nNumero de nos: %d", cont);
+	puts("");
 	puts("");
 	puts("");
 	imprimirLista(l1);
 	puts("");
+
+	removeK(l1, 1);
+	
+	printf("\nLista L1(%p) apos remover o primeiro no: \n", l1);
+	imprimirLista(l1);
+
+	l2 = copia(l1);
 	puts("");
+	puts("");
+
+	printf("\nLista l2: %p", l2);
+	puts("");
+	imprimirLista(l2);
+	puts("");
+	puts("");
+	l2 = insereAntesK(l2, 3);
+	printf("\nLista l2: %p\n", l2);
+	imprimirLista(l2);
+	puts("");
+	puts("");
+
 	return 0;
 }
